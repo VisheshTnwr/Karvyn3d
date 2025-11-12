@@ -120,7 +120,7 @@ export default function Home() {
             {/* --- Image 1 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x600/000000/A3E635?text=Custom+Keychain"
+                src="/images/Ps5 Keychain.jpg"
                 alt="Personalized 3D Print - Custom Keychain"
                 placeholderSrc="https://placehold.co/600x600/000000/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
@@ -139,7 +139,7 @@ export default function Home() {
             {/* --- Image 2 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x800/0a0a0a/A3E635?text=Geometric+Vase"
+                src="/images/Trio.jpg"
                 alt="3D Printed Home Decor - Geometric Vase"
                 placeholderSrc="https://placehold.co/600x800/0a0a0a/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
@@ -158,7 +158,7 @@ export default function Home() {
             {/* --- Image 3 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x500/050505/A3E635?text=Phone+Stand"
+                src="/images/Phone Stand.jpg"
                 alt="3D Printed Office Organizer - Phone Stand"
                 placeholderSrc="https://placehold.co/600x500/050505/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
@@ -177,7 +177,7 @@ export default function Home() {
             {/* --- Image 4 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x700/0f0f0f/A3E635?text=Custom+Clock"
+                src="/images/Clock.jpg"
                 alt="3D Printed Custom Clock"
                 placeholderSrc="https://placehold.co/600x700/0f0f0f/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
@@ -196,7 +196,7 @@ export default function Home() {
             {/* --- Image 5 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x600/080808/A3E635?text=Custom+Lithophane"
+                src="/images/LithoFane.png"
                 alt="3D Printed Custom Lithophane"
                 placeholderSrc="https://placehold.co/600x600/080808/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
@@ -215,7 +215,7 @@ export default function Home() {
             {/* --- Image 6 --- */}
             <div className="bg-gray-900 rounded-3xl overflow-hidden fade-in-section border border-gray-800 gallery-card">
               <GalleryImage
-                src="https://placehold.co/600x400/0c0c0c/A3E635?text=Desk+Nameplate"
+                src="/images/Nameplate.webp"
                 alt="3D Printed Desk Nameplate"
                 placeholderSrc="https://placehold.co/600x400/0c0c0c/A3E635?text=Image+Error"
                 className="w-full h-96 object-cover"
