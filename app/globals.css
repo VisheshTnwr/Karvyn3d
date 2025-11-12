@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-poppins), sans-serif;
+}
+
+/* Base styles */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Define the accent color variable */
+  --color-accent: #A3E635; /* lime-400 */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-sans), sans-serif;
+    background-color: #000000; /* Pure Black */
+    color: #E5E7EB; /* text-gray-200 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font System */
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading), sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+/* Accent Color */
+.text-accent {
+    color: var(--color-accent);
+}
+.bg-accent {
+    background-color: var(--color-accent);
+}
+.border-accent {
+    border-color: var(--color-accent);
+}
+.hover-bg-accent:hover {
+    background-color: #84CC16; /* lime-500 */
+}
+
+/* Subtle animation for elements fading in on scroll */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Abstract background glow for hero */
+.hero-glow {
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(163, 230, 53, 0.15), rgba(163, 230, 53, 0));
+}
+
+/* --- 3D PRINTER ANIMATIONS (Hero) --- */
+@keyframes print-head-move {
+    0%, 100% { transform: translateX(-40px); }
+    50% { transform: translateX(40px); }
+}
+
+@keyframes print-object-grow {
+    0% { transform: scaleY(0); }
+    100% { transform: scaleY(1); }
+}
+
+.animate-print-head {
+    animation: print-head-move 3s infinite ease-in-out;
+}
+
+.animate-print-object {
+    transform-origin: bottom;
+    animation: print-object-grow 10s 1s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* --- "Unpacking Boxes" Animation --- */
+@keyframes subtle-glow {
+    0%, 100% { box-shadow: 0 0 25px 5px rgba(163, 230, 53, 0.3); opacity: 0.8; }
+    50% { box-shadow: 0 0 40px 10px rgba(163, 230, 53, 0.5); opacity: 1; }
+}
+
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+/* --- Refined Gallery Card Hover --- */
+.gallery-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px -10px rgba(163, 230, 53, 0.1);
 }
