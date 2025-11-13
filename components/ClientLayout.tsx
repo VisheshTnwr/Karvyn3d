@@ -239,7 +239,7 @@ export default function ClientLayout({
                     href="#"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
-                    TikTok
+                    FaceBook
                   </a>
                 </li>
                 <li>
