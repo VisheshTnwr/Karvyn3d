@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function ClientLayout({
   children,
@@ -97,12 +98,12 @@ export default function ClientLayout({
             >
               Store
             </a>
-            <a
-              href="#store"
-              className="px-6 py-3 text-sm font-bold text-black bg-accent rounded-xl shadow-lg hover-bg-accent transition-all"
+            <Link
+              href="/products"
+              className="text-gray-300 hover:text-accent transition-colors"
             >
-              Get Notified
-            </a>
+              Store
+            </Link>
           </div>
         </nav>
         <div
@@ -125,13 +126,13 @@ export default function ClientLayout({
           >
             About
           </a>
-          <a
-            href="#store"
+          <Link
+            href="/products"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block text-gray-300 hover:text-accent transition-colors text-lg p-2"
+            className="block text-gray-300 ..."
           >
             Store
-          </a>
+          </Link>
           <a
             href="#store"
             onClick={() => setIsMobileMenuOpen(false)}
