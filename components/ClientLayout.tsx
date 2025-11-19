@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+// 1. Import usePathname
+import { usePathname } from "next/navigation";
+import Link from "next/link"; // Ensure Link is imported if not already
 
 export default function ClientLayout({
   children,
@@ -9,10 +11,19 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname(); // 2. Get the current URL path
 
+  // This hook handles the mobile menu toggle and scroll animations
+  // 3. Add 'pathname' to the dependency array
   useEffect(() => {
+    // Reset all fade-in sections every time the path changes
+    const sections = document.querySelectorAll(".fade-in-section");
+    sections.forEach((section) => {
+      section.classList.remove("is-visible"); // Reset to invisible state
+    });
+
     const menuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
+    // const mobileMenu = document.getElementById("mobile-menu"); // Removed as we use state
 
     const handleMenuClick = () => {
       setIsMobileMenuOpen((prev) => !prev);
@@ -22,7 +33,7 @@ export default function ClientLayout({
       menuButton.addEventListener("click", handleMenuClick);
     }
 
-    const sections = document.querySelectorAll(".fade-in-section");
+    // 4. Re-establish the IntersectionObserver
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -40,6 +51,7 @@ export default function ClientLayout({
       observer.observe(section);
     });
 
+    // Cleanup listeners
     return () => {
       if (menuButton) {
         menuButton.removeEventListener("click", handleMenuClick);
@@ -48,18 +60,19 @@ export default function ClientLayout({
         observer.unobserve(section);
       });
     };
-  }, []);
+  }, [pathname]); // <-- THE FIX: Rerun the effect when the URL path changes
 
   return (
     <body className="antialiased">
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md">
         <nav className="container mx-auto max-w-7xl px-6 py-5 flex justify-between items-center">
-          <a
-            href="#"
+          {/* ... HEADER NAVIGATION REMAINS THE SAME ... */}
+          <Link
+            href="/"
             className="text-2xl font-heading tracking-tighter text-white"
           >
             karvyn<span className="text-accent">3d</span>
-          </a>
+          </Link>
           <button
             id="mobile-menu-button"
             className="md:hidden text-gray-200 focus:outline-none p-2 rounded-lg bg-gray-900 border border-gray-800"
@@ -92,18 +105,18 @@ export default function ClientLayout({
             >
               About
             </a>
-            <a
-              href="#store"
-              className="text-gray-300 hover:text-accent transition-colors"
-            >
-              Store
-            </a>
             <Link
-              href="/products"
+              href="/category/personalized-gifts"
               className="text-gray-300 hover:text-accent transition-colors"
             >
               Store
             </Link>
+            <a
+              href="#store"
+              className="px-6 py-3 text-sm font-bold text-black bg-accent rounded-xl shadow-lg hover-bg-accent transition-all"
+            >
+              Get Notified
+            </a>
           </div>
         </nav>
         <div
@@ -127,9 +140,9 @@ export default function ClientLayout({
             About
           </a>
           <Link
-            href="/products"
+            href="/category/personalized-gifts"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block text-gray-300 ..."
+            className="block text-gray-300 hover:text-accent transition-colors text-lg p-2"
           >
             Store
           </Link>
@@ -142,17 +155,20 @@ export default function ClientLayout({
           </a>
         </div>
       </header>
-      {children} {/* <-- This is where your page.tsx content will go */}
+
+      {children}
+
+      {/* FOOTER REMAINS THE SAME (using Link for correct navigation) */}
       <footer className="border-t border-gray-900 mt-24 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
             <div className="md:col-span-1">
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="font-heading text-3xl text-white mb-4 inline-block"
               >
                 karvyn<span className="text-accent">3d</span>
-              </a>
+              </Link>
               <p className="text-gray-400 pr-4">
                 Your ideas, printed. Custom 3D printing for gifts, home, and
                 office.
@@ -162,12 +178,12 @@ export default function ClientLayout({
               <h4 className="font-heading text-lg text-accent mb-4">MENU</h4>
               <ul className="space-y-3">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -191,28 +207,28 @@ export default function ClientLayout({
               <h4 className="font-heading text-lg text-accent mb-4">SHOP</h4>
               <ul className="space-y-3">
                 <li>
-                  <a
-                    href="#gallery"
+                  <Link
+                    href="/category/personalized-gifts"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     Personalized Gifts
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#gallery"
+                  <Link
+                    href="/category/home-decor"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     Home Decor
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#gallery"
+                  <Link
+                    href="/category/office-gifting"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     Office & Gifting
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -240,7 +256,7 @@ export default function ClientLayout({
                     href="#"
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
-                    FaceBook
+                    TikTok
                   </a>
                 </li>
                 <li>
