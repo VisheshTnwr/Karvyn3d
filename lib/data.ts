@@ -4,7 +4,7 @@ export type Category = {
   slug: string;
   name: string;
   description: string;
-};
+}; // <--- THIS CLOSING BRACE WAS MISSING
 
 export type Product = {
   id: string;
@@ -20,19 +20,22 @@ export const CATEGORIES: Category[] = [
     id: "cat_1",
     slug: "personalized-gifts",
     name: "Personalized Gifts",
-    description: "Custom keychains, nameplates, and unique mementos for every occasion.",
+    description:
+      "Custom keychains, nameplates, and unique mementos for every occasion.",
   },
   {
     id: "cat_2",
     slug: "home-decor",
     name: "Artsy Home Decor",
-    description: "Minimalist vases, geometric planters, and abstract sculptures to elevate your space.",
+    description:
+      "Minimalist vases, geometric planters, and abstract sculptures to elevate your space.",
   },
   {
     id: "cat_3",
     slug: "office-gifting",
     name: "Office & Gifting",
-    description: "Stylish desk organizers, phone stands, unique boxes, and custom clocks.",
+    description:
+      "Stylish desk organizers, phone stands, unique boxes, and custom clocks.",
   },
 ];
 
@@ -44,21 +47,21 @@ export const PRODUCTS: Product[] = [
     name: "Custom Text Keychain",
     category: "personalized-gifts",
     price: "14.99",
-    image: "/images/gallery-1.jpg", // Use your real image path
+    image: "/images/ps5 keychain.jpg",
   },
   {
     id: "prod_2",
     name: "Photo Lithophane",
     category: "personalized-gifts",
     price: "29.99",
-    image: "/images/gallery-5.jpg", // Use your real image path
+    image: "/images/lithophane.jpg",
   },
   {
     id: "prod_3",
     name: "Custom Desk Plate",
     category: "personalized-gifts",
     price: "22.50",
-    image: "/images/gallery-6.jpg", // Use your real image path
+    image: "/images/desk-plate.jpg",
   },
   // Home Decor
   {
@@ -66,14 +69,14 @@ export const PRODUCTS: Product[] = [
     name: "Geometric Vase",
     category: "home-decor",
     price: "34.99",
-    image: "/images/gallery-2.jpg", // Use your real image path
+    image: "/images/vase.jpg",
   },
   {
     id: "prod_5",
     name: "Bespoke Hexagon Clock",
     category: "home-decor",
     price: "49.99",
-    image: "/images/gallery-4.jpg", // Use your real image path
+    image: "/images/clock.jpg",
   },
   {
     id: "prod_6",
@@ -88,7 +91,7 @@ export const PRODUCTS: Product[] = [
     name: "Sleek Phone Stand",
     category: "office-gifting",
     price: "24.99",
-    image: "/images/gallery-3.jpg", // Use your real image path
+    image: "/images/phone-stand.jpg",
   },
   {
     id: "prod_8",
