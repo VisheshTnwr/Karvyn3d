@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// 1. Import usePathname
 import { usePathname } from "next/navigation";
-import Link from "next/link"; // Ensure Link is imported if not already
+import Link from "next/link";
 
 export default function ClientLayout({
   children,
@@ -11,19 +10,27 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname(); // 2. Get the current URL path
+  const pathname = usePathname();
 
-  // This hook handles the mobile menu toggle and scroll animations
-  // 3. Add 'pathname' to the dependency array
+  // --- 1. LOGIC FOR CONDITIONAL LINKS ---
+  const isHomePage = pathname === "/";
+
+  // If on home, scroll to ID (#gallery). If not, go to home then scroll (/#gallery).
+  const galleryLink = isHomePage ? "#gallery" : "/#gallery";
+  const aboutLink = isHomePage ? "#about" : "/#about";
+  
+  // Store link always goes to the first category
+  const storeLink = "/category/personalized-gifts";
+
+  // --- 2. EFFECT FOR ANIMATIONS & MENU ---
   useEffect(() => {
-    // Reset all fade-in sections every time the path changes
+    // Reset all fade-in sections every time the path changes (fixes disappearing content)
     const sections = document.querySelectorAll(".fade-in-section");
     sections.forEach((section) => {
-      section.classList.remove("is-visible"); // Reset to invisible state
+      section.classList.remove("is-visible");
     });
 
     const menuButton = document.getElementById("mobile-menu-button");
-    // const mobileMenu = document.getElementById("mobile-menu"); // Removed as we use state
 
     const handleMenuClick = () => {
       setIsMobileMenuOpen((prev) => !prev);
@@ -33,7 +40,7 @@ export default function ClientLayout({
       menuButton.addEventListener("click", handleMenuClick);
     }
 
-    // 4. Re-establish the IntersectionObserver
+    // Re-establish the IntersectionObserver for scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -60,19 +67,21 @@ export default function ClientLayout({
         observer.unobserve(section);
       });
     };
-  }, [pathname]); // <-- THE FIX: Rerun the effect when the URL path changes
+  }, [pathname]); // <-- Re-run this when URL changes
 
   return (
     <body className="antialiased">
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md">
         <nav className="container mx-auto max-w-7xl px-6 py-5 flex justify-between items-center">
-          {/* ... HEADER NAVIGATION REMAINS THE SAME ... */}
+          {/* Logo */}
           <Link
             href="/"
             className="text-2xl font-heading tracking-tighter text-white"
           >
             karvyn<span className="text-accent">3d</span>
           </Link>
+
+          {/* Mobile Menu Button */}
           <button
             id="mobile-menu-button"
             className="md:hidden text-gray-200 focus:outline-none p-2 rounded-lg bg-gray-900 border border-gray-800"
@@ -92,21 +101,23 @@ export default function ClientLayout({
               ></path>
             </svg>
           </button>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6 items-center">
             <a
-              href="#gallery"
+              href={galleryLink}
               className="text-gray-300 hover:text-accent transition-colors"
             >
               Gallery
             </a>
             <a
-              href="#about"
+              href={aboutLink}
               className="text-gray-300 hover:text-accent transition-colors"
             >
               About
             </a>
             <Link
-              href="/category/personalized-gifts"
+              href={storeLink}
               className="text-gray-300 hover:text-accent transition-colors"
             >
               Store
@@ -119,6 +130,8 @@ export default function ClientLayout({
             </a>
           </div>
         </nav>
+
+        {/* Mobile Menu Dropdown */}
         <div
           id="mobile-menu"
           className={`${
@@ -126,21 +139,21 @@ export default function ClientLayout({
           } md:hidden px-6 pb-6 pt-3 space-y-3 bg-black/80 backdrop-blur-md`}
         >
           <a
-            href="#gallery"
+            href={galleryLink}
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-gray-300 hover:text-accent transition-colors text-lg p-2"
           >
             Gallery
           </a>
           <a
-            href="#about"
+            href={aboutLink}
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-gray-300 hover:text-accent transition-colors text-lg p-2"
           >
             About
           </a>
           <Link
-            href="/category/personalized-gifts"
+            href={storeLink}
             onClick={() => setIsMobileMenuOpen(false)}
             className="block text-gray-300 hover:text-accent transition-colors text-lg p-2"
           >
@@ -158,7 +171,7 @@ export default function ClientLayout({
 
       {children}
 
-      {/* FOOTER REMAINS THE SAME (using Link for correct navigation) */}
+      {/* Footer */}
       <footer className="border-t border-gray-900 mt-24 py-20 md:py-28">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
@@ -187,7 +200,7 @@ export default function ClientLayout({
                 </li>
                 <li>
                   <a
-                    href="#gallery"
+                    href={galleryLink}
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     Gallery
@@ -195,7 +208,7 @@ export default function ClientLayout({
                 </li>
                 <li>
                   <a
-                    href="#about"
+                    href={aboutLink}
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
                     About
