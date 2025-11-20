@@ -19,8 +19,8 @@ export default function ClientLayout({
   const galleryLink = isHomePage ? "#gallery" : "/#gallery";
   const aboutLink = isHomePage ? "#about" : "/#about";
   
-  // Store link always goes to the first category
-  const storeLink = "/category/personalized-gifts";
+  // UPDATED: Store link now points to the new catalogue page
+  const storeLink = "/store"; 
 
   // --- 2. EFFECT FOR ANIMATIONS & MENU ---
   useEffect(() => {
@@ -244,12 +244,12 @@ export default function ClientLayout({
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#store"
+                  <Link
+                    href={storeLink}
                     className="text-gray-400 hover:text-accent transition-colors"
                   >
-                    Store (Coming Soon)
-                  </a>
+                    Store
+                  </Link>
                 </li>
               </ul>
             </div>
