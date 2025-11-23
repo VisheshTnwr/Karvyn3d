@@ -79,7 +79,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <h2 className="text-3xl font-heading text-white mb-4">More Products Coming Soon</h2>
               <p className="text-lg text-gray-400 mb-8">This category is currently empty. Check back soon!</p>
               <Link href="/" className="px-10 py-4 text-lg font-bold text-black bg-accent rounded-xl shadow-lg hover-bg-accent transition-all">
-                Back to Home
+                Back to Home.
               </Link>
             </div>
           )}
