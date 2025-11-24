@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
-import ClientLayout from "@/components/ClientLayout"; // <-- Import the new component
+import ClientLayout from "@/components/ClientLayout";
+import { CartProvider } from "@/context/CartContext"; // <-- Import the provider
 
-// Configure the fonts
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -16,11 +16,9 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-// This is now allowed because this is a Server Component
 export const metadata = {
   title: "Karvyn3D - Custom 3D Printing & Design",
-  description:
-    "Custom 3D printing for gifts, home, and office. If you can think it, we can make it.",
+  description: "Custom 3D printing for gifts, home, and office.",
 };
 
 export default function RootLayout({
@@ -29,15 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${poppins.variable} scroll-smooth`}
-    >
-      {/*
-        The <ClientLayout> component now contains the <body>,
-        <header>, <footer>, and all the interactive logic.
+    <html lang="en" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
+      {/* STEP 4: WRAP EVERYTHING IN CARTPROVIDER 
+        This ensures the cart state is available to the Header (ClientLayout) 
+        and all your pages.
       */}
-      <ClientLayout>{children}</ClientLayout>
+      <CartProvider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+      </CartProvider>
     </html>
   );
 }
