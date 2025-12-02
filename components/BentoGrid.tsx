@@ -1,8 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils"; // We will create this utility next
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 export const BentoGrid = ({
@@ -44,7 +43,7 @@ export const BentoGridItem = ({
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-gray-900 border border-gray-800 justify-between flex flex-col space-y-4",
+        "row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 justify-between flex flex-col space-y-4",
         className
       )}
     >
@@ -52,10 +51,10 @@ export const BentoGridItem = ({
         {header}
         <div className="group-hover/bento:translate-x-2 transition duration-200 mt-4">
           {icon}
-          <div className="font-heading font-bold text-white mb-2 mt-2">
+          <div className="font-heading font-bold text-black dark:text-white mb-2 mt-2 transition-colors">
             {title}
           </div>
-          <div className="font-sans font-normal text-gray-400 text-xs">
+          <div className="font-sans font-normal text-gray-600 dark:text-gray-400 text-xs transition-colors">
             {description}
           </div>
         </div>

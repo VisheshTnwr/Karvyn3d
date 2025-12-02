@@ -1,7 +1,8 @@
 import "./globals.css";
 import { Inter, Poppins } from "next/font/google";
 import ClientLayout from "@/components/ClientLayout";
-import { CartProvider } from "@/context/CartContext"; // <-- Import the provider
+import { CartProvider } from "@/context/CartContext";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,16 +28,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
-      {/* STEP 4: WRAP EVERYTHING IN CARTPROVIDER 
-        This ensures the cart state is available to the Header (ClientLayout) 
-        and all your pages.
-      */}
-      <CartProvider>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
-      </CartProvider>
+    // suppressHydrationWarning is required for next-themes to work correctly
+    <html lang="en" className={`${inter.variable} ${poppins.variable} scroll-smooth`} suppressHydrationWarning>
+      <body className="antialiased bg-white dark:bg-black text-black dark:text-gray-200 transition-colors duration-300">
+        <CartProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          </ThemeProvider>
+        </CartProvider>
+      </body>
     </html>
   );
 }
